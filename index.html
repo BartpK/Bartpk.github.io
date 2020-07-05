@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping list</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+
+    <script defer src="api-calls.js"></script>
+    <script defer src="script.js"></script>
+</head>
+
+<body>
+    <header>
+        <section class="headerwrapper">
+            <input type="text" id="textinput" class="textinput" placeholder="What are we buying?">
+            <input type="number" id="qtyinput" class="qtyinput" placeholder="How many?">
+            <select id="aisleselect">
+                <option>Vegetables</option>
+                <option>Meats</option>
+                <option>Cheese</option>
+                <option>Bread</option>
+                <option>Tea</option>
+                <option>Dairy</option>
+                <option>Pasta</option>
+                <option>Sauces</option>
+                <option>Snacks</option>
+                <option>Household</option>
+            </select>
+            <button id="addbutton">Add</button>
+
+
+            <select id="recipeselect" placeholder="Add to database">
+                <option value="" disabled selected>Add from database</option>
+            </select>
+            <button id="addnewrecipebutton">Add a recipe</button>
+        </section>
+    </header>
+    <main>
+        <p class="thursday"></p>
+        <div class="aislewrapper">
+            <h5>Vegetables</h5>
+            <div id="Vegetables" class="aisleheader">
+            </div>
+        </div>
+        <div class="aislewrapper">
+            <h5>Meats</h5>
+            <div id="Meats" class="aisleheader">
+            </div>
+        </div>
+        <div class="aislewrapper">
+            <h5>Cheese</h5>
+            <div id="Cheese" class="aisleheader">
+            </div>
+        </div>
+        <div class="aislewrapper">
+            <h5>Bread</h5>
+            <div id="Bread" class="aisleheader">
+            </div>
+        </div>
+        <div class="aislewrapper">
+            <h5>Tea</h5>
+            <div id="Tea" class="aisleheader">
+            </div>
+        </div>
+        <div class="aislewrapper">
+            <h5>Dairy</h5>
+            <div id="Dairy" class="aisleheader">
+            </div>
+        </div>
+        <div class="aislewrapper">
+            <h5>Pasta</h5>
+            <div id="Pasta" class="aisleheader">
+            </div>
+        </div>
+        <div class="aislewrapper">
+            <h5>Sauces</h5>
+            <div id="Sauces" class="aisleheader">
+            </div>
+        </div>
+        <div class="aislewrapper">
+            <h5>Snacks</h5>
+            <div id="Snacks" class="aisleheader">
+            </div>
+        </div>
+        <div class="aislewrapper">
+            <h5>Household</h5>
+            <div id="Household" class="aisleheader">
+            </div>
+        </div>
+        <div class="aislewrapper">
+            <h5>Other</h5>
+            <div id="Other" class="aisleheader">
+            </div>
+        </div>
+        <section id="recipepopup" class="hiddenpopup">
+            <h4 id="recipeheader"></h4>
+            <section id="ingredientscontainer"></section>
+
+        </section>
+
+
+        <section id="addrecipepopup" class="hiddenpopup">
+            <h4 id="addrecipepopupheader"></h4>
+            <section id="addrecipecontents">
+                <input type="text" id="newrecipename" placeholder="Recipe name">
+                <br>
+
+                <input type="text" id="ingredient1" placeholder="ingredient name"><select id="ingredientaisle1">
+                    <option value="" disabled selected>Pick aisle</option>
+                    <option>Vegetables</option>
+                    <option>Meats</option>
+                    <option>Cheese</option>
+                    <option>Bread</option>
+                    <option>Tea</option>
+                    <option>Dairy</option>
+                    <option>Pasta</option>
+                    <option>Sauces</option>
+                    <option>Snacks</option>
+                    <option>Household</option>
+                </select>
+
+                <input type="text" id="ingredient2" placeholder="ingredient name"><select id="ingredientaisle2">
+                    <option value="" disabled selected>Pick aisle</option>
+                    <option>Vegetables</option>
+                    <option>Meats</option>
+                    <option>Cheese</option>
+                    <option>Bread</option>
+                    <option>Tea</option>
+                    <option>Dairy</option>
+                    <option>Pasta</option>
+                    <option>Sauces</option>
+                    <option>Snacks</option>
+                    <option>Household</option>
+                </select>
+
+                <input type="text" id="ingredient3" placeholder="ingredient name"><select id="ingredientaisle3">
+                    <option value="" disabled selected>Pick aisle</option>
+                    <option>Vegetables</option>
+                    <option>Meats</option>
+                    <option>Cheese</option>
+                    <option>Bread</option>
+                    <option>Tea</option>
+                    <option>Dairy</option>
+                    <option>Pasta</option>
+                    <option>Sauces</option>
+                    <option>Snacks</option>
+                    <option>Household</option>
+                </select>
+
+                <input type="text" id="ingredient4" placeholder="ingredient name"><select id="ingredientaisle4">
+                    <option value="" disabled selected>Pick aisle</option>
+                    <option>Vegetables</option>
+                    <option>Meats</option>
+                    <option>Cheese</option>
+                    <option>Bread</option>
+                    <option>Tea</option>
+                    <option>Dairy</option>
+                    <option>Pasta</option>
+                    <option>Sauces</option>
+                    <option>Snacks</option>
+                    <option>Household</option>
+                </select>
+
+                <input type="text" id="ingredient5" placeholder="ingredient name"><select id="ingredientaisle5">
+                    <option value="" disabled selected>Pick aisle</option>
+                    <option>Vegetables</option>
+                    <option>Meats</option>
+                    <option>Cheese</option>
+                    <option>Bread</option>
+                    <option>Tea</option>
+                    <option>Dairy</option>
+                    <option>Pasta</option>
+                    <option>Sauces</option>
+                    <option>Snacks</option>
+                    <option>Household</option>
+                </select>
+
+                <input type="text" id="ingredient6" placeholder="ingredient name"><select id="ingredientaisle6">
+                    <option value="" disabled selected>Pick aisle</option>
+                    <option>Vegetables</option>
+                    <option>Meats</option>
+                    <option>Cheese</option>
+                    <option>Bread</option>
+                    <option>Tea</option>
+                    <option>Dairy</option>
+                    <option>Pasta</option>
+                    <option>Sauces</option>
+                    <option>Snacks</option>
+                    <option>Household</option>
+                </select>
+
+                <input type="text" id="ingredient0" placeholder="ingredient name"><select id="ingredientaisle0">
+                    <option value="" disabled selected>Pick aisle</option>
+                    <option>Vegetables</option>
+                    <option>Meats</option>
+                    <option>Cheese</option>
+                    <option>Bread</option>
+                    <option>Tea</option>
+                    <option>Dairy</option>
+                    <option>Pasta</option>
+                    <option>Sauces</option>
+                    <option>Snacks</option>
+                    <option>Household</option>
+                </select>
+                <button id="addrecipebutton">Add recipe</button>
+                <button id="canceladdrecipe">Cancel</button>
+
+            </section>
+
+        </section>
+
+
+    </main>
+
+
+    <footer>
+        <div class="clearbuttonwrapper"><button id="clearlist">Clear shopping list</button></div>
+    </footer>
+
+
+</body>
+
+</html>
