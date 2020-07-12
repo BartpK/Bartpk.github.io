@@ -314,11 +314,15 @@ const matchIngredientToAisle = (ingredientToLookup) => {
 
 const addRecipeToDatabase = () => {
     let newIngredientsList = "";
-    for (i = 0; i < 7; i++) {
+
+    const ingredientsToAddArray = [];
+    for (i = 0; i < 10; i++) {
         const ingredientToAdd = document.querySelector(`#ingredient${i}`).value;
         if (ingredientToAdd != "" && ingredientToAdd != " ") {
-            newIngredientsList += ingredientToAdd + ",";
+            ingredientsToAddArray.push(ingredientToAdd);
         }
+        newIngredientsList = ingredientsToAddArray.join(",");
+        console.log("list of new ingredients: ", newIngredientsList)
     }
     ///Create function to add recipe to database
     const newRecipeObject = `{
@@ -333,7 +337,7 @@ const addRecipeToDatabase = () => {
 }
 const addIngredientsToDatabase = () => {
 
-    for (i = 0; i < 7; i++) {
+    for (i = 0; i < 10; i++) {
         const ingredientToAdd = document.querySelector(`#ingredient${i}`).value;
         const aisleToAdd = document.querySelector(`#ingredientaisle${i}`).value;
         if (ingredientToAdd != "" && ingredientToAdd != " ") {
@@ -353,6 +357,7 @@ const postIngredientsToDatabase = async (newIngredientObject) => {
     console.log(newIngredientObject)
     try {
         await fetch("https://shopping-list-bd71b.firebaseio.com/Ingredients.json", { method: "POST", body: `${newIngredientObject}` });
+        getData;
     }
     catch {
         alert("Could no add ingredient to database");
