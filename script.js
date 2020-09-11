@@ -1,7 +1,61 @@
+////Data tests
+console.log(
+    shoppingItems.map(item => {
+        return item.item
+    }).sort()
+)
+
+////
+
 let recipesArray = [];
 let ingredientsArray = [];
 
 const textInput = document.querySelector("#textinput");
+const autoSuggestPopup = document.querySelector("#autosuggestpopup")
+
+
+textInput.addEventListener('input', (e) => {
+    autoSuggestPopup.innerHTML = ""
+    const suggestionArray = shoppingItems.filter(item => {
+        return (item.item.toLowerCase().includes(e.target.value.toLowerCase()));
+    })
+    if (e.target.value.length > 0) {
+        displaySuggestions(suggestionArray, e.target.value);
+    } else {
+        autoSuggestPopup.className = "hiddenpopup"
+    }
+})
+
+const displaySuggestions = (suggestions, searchString) => {
+    suggestions = suggestions.slice(0, 10)
+    console.log(suggestions.length)
+    if (suggestions.length > 0) {
+        autoSuggestPopup.className = "openpopup"
+    } else {
+        autoSuggestPopup.className = "hiddenpopup"
+    }
+    //searchString.replace(searchString[0], searchString[0].toUpperCase)
+    searchString = searchString[0].toUpperCase().concat(searchString.substring(1))
+    console.log(searchString)
+    suggestions.forEach(suggestion => {
+        let newElement = document.createElement('div');
+        newElement.innerHTML = (
+            `<p class="suggestionitem">${suggestion.item.replace(searchString, `<strong>${searchString}</strong>`)} </p>
+                <p class="suggestionaisle">${suggestion.aisle} aisle</p>`
+        )
+        // newElement.innerHTML = `${suggestion.item} in aisle ${suggestion.aisle}`
+        // newElement.className = "suggestion"
+        autoSuggestPopup.appendChild(newElement);
+        newElement.addEventListener('click', () => popSuggested(suggestion.item, suggestion.aisle))
+    })
+}
+
+const popSuggested = (item, aisle) => {
+    textInput.value = item;
+    aisleSelect.value = aisle;
+    autoSuggestPopup.className = "hiddenpopup"
+}
+
 const qtyInput = document.querySelector("#qtyinput");
 const aisleSelect = document.querySelector("#aisleselect");
 const addButton = document.querySelector("#addbutton");
@@ -204,6 +258,7 @@ const addItem = async (item, aisle, qty) => {
     }
     textInput.value = "";
     qtyInput.value = "1";
+    autoSuggestPopup.className = "hiddenpopup"
     getData();
 }
 
@@ -314,15 +369,11 @@ const matchIngredientToAisle = (ingredientToLookup) => {
 
 const addRecipeToDatabase = () => {
     let newIngredientsList = "";
-
-    const ingredientsToAddArray = [];
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 7; i++) {
         const ingredientToAdd = document.querySelector(`#ingredient${i}`).value;
         if (ingredientToAdd != "" && ingredientToAdd != " ") {
-            ingredientsToAddArray.push(ingredientToAdd);
+            newIngredientsList += ingredientToAdd + ",";
         }
-        newIngredientsList = ingredientsToAddArray.join(",");
-        console.log("list of new ingredients: ", newIngredientsList)
     }
     ///Create function to add recipe to database
     const newRecipeObject = `{
@@ -337,14 +388,14 @@ const addRecipeToDatabase = () => {
 }
 const addIngredientsToDatabase = () => {
 
-    for (i = 0; i < 10; i++) {
+    for (i = 0; i < 7; i++) {
         const ingredientToAdd = document.querySelector(`#ingredient${i}`).value;
         const aisleToAdd = document.querySelector(`#ingredientaisle${i}`).value;
         if (ingredientToAdd != "" && ingredientToAdd != " ") {
 
             const newIngredientObject = `{
-                "aisle": "${ aisleToAdd}",
-                "ingredient": "${ ingredientToAdd}"
+                "aisle": "${aisleToAdd}",
+                "ingredient": "${ingredientToAdd}"
             }`
 
             console.log("new ingredient object: ", newIngredientObject)
@@ -357,7 +408,6 @@ const postIngredientsToDatabase = async (newIngredientObject) => {
     console.log(newIngredientObject)
     try {
         await fetch("https://shopping-list-bd71b.firebaseio.com/Ingredients.json", { method: "POST", body: `${newIngredientObject}` });
-        getData;
     }
     catch {
         alert("Could no add ingredient to database");

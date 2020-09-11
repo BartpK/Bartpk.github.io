@@ -247,5 +247,31 @@ background-color: #1D3354;
 }
 
 #ingredient0, #ingredient1, #ingredient2, #ingredient3, #ingredient4, #ingredient5, #ingredient6, #ingredient7, #ingredient8, #ingredient9 {
-    width: 58%;
+    width: 59%;
 }  
+
+
+#autosuggestpopup {
+    background-color: white;
+    position: absolute;
+    top: 140px;
+    width: 260px;
+    opacity: 0.95;
+    padding: 0.4rem;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 15px -3px rgba(0,0,0,0.75);
+}
+
+#autosuggestpopup > div {
+    padding: 0.4rem;
+}
+
+
+#autosuggestpopup > div:nth-child(2n+0) {
+    background: #f6f6f6;
+}
+
+.suggestionaisle  {
+    font-size: 0.6rem;
+}
+

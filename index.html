@@ -7,7 +7,7 @@
     <title>Shopping list</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-
+    <script defer src="assets/items.js"></script>
     <script defer src="api-calls.js"></script>
     <script defer src="script.js"></script>
 </head>
@@ -101,27 +101,15 @@
 
         </section>
 
+        <section id="autosuggestpopup" class="hiddenpopup">
+
+        </section>
 
         <section id="addrecipepopup" class="hiddenpopup">
             <h4 id="addrecipepopupheader"></h4>
             <section id="addrecipecontents">
                 <input type="text" id="newrecipename" placeholder="Recipe name">
                 <br>
-
-
-                <input type="text" id="ingredient0" placeholder="ingredient name"><select id="ingredientaisle0">
-                    <option value="" disabled selected>Pick aisle</option>
-                    <option>Vegetables</option>
-                    <option>Meats</option>
-                    <option>Cheese</option>
-                    <option>Bread</option>
-                    <option>Tea</option>
-                    <option>Dairy</option>
-                    <option>Pasta</option>
-                    <option>Sauces</option>
-                    <option>Snacks</option>
-                    <option>Household</option>
-                </select>
 
                 <input type="text" id="ingredient1" placeholder="ingredient name"><select id="ingredientaisle1">
                     <option value="" disabled selected>Pick aisle</option>
@@ -207,8 +195,7 @@
                     <option>Household</option>
                 </select>
 
-
-                <input type="text" id="ingredient7" placeholder="ingredient name"><select id="ingredientaisle7">
+                <input type="text" id="ingredient0" placeholder="ingredient name"><select id="ingredientaisle0">
                     <option value="" disabled selected>Pick aisle</option>
                     <option>Vegetables</option>
                     <option>Meats</option>
@@ -221,35 +208,6 @@
                     <option>Snacks</option>
                     <option>Household</option>
                 </select>
-
-                <input type="text" id="ingredient8" placeholder="ingredient name"><select id="ingredientaisle8">
-                    <option value="" disabled selected>Pick aisle</option>
-                    <option>Vegetables</option>
-                    <option>Meats</option>
-                    <option>Cheese</option>
-                    <option>Bread</option>
-                    <option>Tea</option>
-                    <option>Dairy</option>
-                    <option>Pasta</option>
-                    <option>Sauces</option>
-                    <option>Snacks</option>
-                    <option>Household</option>
-                </select>
-
-                <input type="text" id="ingredient9" placeholder="ingredient name"><select id="ingredientaisle9">
-                    <option value="" disabled selected>Pick aisle</option>
-                    <option>Vegetables</option>
-                    <option>Meats</option>
-                    <option>Cheese</option>
-                    <option>Bread</option>
-                    <option>Tea</option>
-                    <option>Dairy</option>
-                    <option>Pasta</option>
-                    <option>Sauces</option>
-                    <option>Snacks</option>
-                    <option>Household</option>
-                </select>
-
                 <button id="addrecipebutton">Add recipe</button>
                 <button id="canceladdrecipe">Cancel</button>
 
