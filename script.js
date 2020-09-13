@@ -5,7 +5,7 @@ console.log(
     }).sort()
 )
 
-////
+
 
 let recipesArray = [];
 let ingredientsArray = [];
@@ -28,26 +28,45 @@ textInput.addEventListener('input', (e) => {
 
 const displaySuggestions = (suggestions, searchString) => {
     suggestions = suggestions.slice(0, 10)
-    console.log(suggestions.length)
+
     if (suggestions.length > 0) {
         autoSuggestPopup.className = "openpopup"
     } else {
         autoSuggestPopup.className = "hiddenpopup"
     }
     //searchString.replace(searchString[0], searchString[0].toUpperCase)
+
+    //Changed search string to start with uppercase letter
     searchString = searchString[0].toUpperCase().concat(searchString.substring(1))
-    console.log(searchString)
+
     suggestions.forEach(suggestion => {
         let newElement = document.createElement('div');
-        newElement.innerHTML = (
-            `<p class="suggestionitem">${suggestion.item.replace(searchString, `<strong>${searchString}</strong>`)} </p>
-                <p class="suggestionaisle">${suggestion.aisle} aisle</p>`
-        )
+        newElement.innerHTML = formatSuggestion(searchString, suggestion) +
+            `<p class="suggestionaisle">${suggestion.aisle} aisle</p>`
+        // (
+        //     `<p class="suggestionitem">${suggestion.item.replace(searchString, `<strong>${searchString}</strong>`)
+        //         .replace(searchString.toLowerCase(), `<strong>${searchString.toLowerCase()}</strong>`)
+        //     } </p>
+        //         <p class="suggestionaisle">${suggestion.aisle} aisle</p>`
+        // )
+
         // newElement.innerHTML = `${suggestion.item} in aisle ${suggestion.aisle}`
         // newElement.className = "suggestion"
         autoSuggestPopup.appendChild(newElement);
         newElement.addEventListener('click', () => popSuggested(suggestion.item, suggestion.aisle))
     })
+}
+
+const formatSuggestion = (searchString, suggestion) => {
+    if (suggestion.item.includes(searchString)) {
+        return (
+            `<p class="suggestionitem">${suggestion.item.replace(searchString, `<strong>${searchString}</strong>`)} </p>`
+        )
+    } else if (suggestion.item.includes(searchString.toLowerCase())) {
+        return (
+            `<p class="suggestionitem">${suggestion.item.replace(searchString.toLowerCase(), `<strong>${searchString.toLowerCase()}</strong>`)} </p>`
+        )
+    }
 }
 
 const popSuggested = (item, aisle) => {
@@ -103,7 +122,7 @@ const getData = async () => {
             qty: data[key].qty,
             bought: data[key].bought
         }));
-        console.log(shoppingList[0]);
+
         showList(shoppingList);
     }
 }
@@ -140,7 +159,7 @@ const showList = (shoppingList) => {
     })
 
     shoppingList.forEach(inputItem => {
-        console.log("input item: " + inputItem.aisle)
+
 
         const listItem = document.createElement("div");
         const item = document.createElement("input");
@@ -180,7 +199,7 @@ const showList = (shoppingList) => {
         removeButton.addEventListener("click", () => { deleteItem(inputItem.id) });
         item.addEventListener("click", () => { updateStatus(inputItem.id, inputItem.item, inputItem.bought, inputItem.aisle, inputItem.qty) })
 
-        const aisle = document.querySelector(`#${inputItem.aisle}`)
+        const aisle = document.querySelector(`#${inputItem.aisle} `)
 
         if (inputItem.bought === true) {
             item.checked = "true";
@@ -249,7 +268,7 @@ const plusminus = async (inputItem, mod) => {
 
 const addItem = async (item, aisle, qty) => {
 
-    console.log({ method: "POST", body: `{ "item": ${item}, "aisle": ${aisle}, "qty":${qty}, "bought": false }` })
+
     try {
         await fetch("https://shopping-list-bd71b.firebaseio.com/ShoppingList.json", { method: "POST", body: `{ "item": "${item}", "aisle": "${aisle}", "qty":${qty}, "bought": false }` });
     }
@@ -380,7 +399,7 @@ const addRecipeToDatabase = () => {
         "ingredients": "${newIngredientsList}",
         "recipe": "${newRecipeName.value}"
     }`
-    console.log("new recipe object: ", newRecipeObject)
+
     if (newRecipeName.value != "" && newRecipeName.value != " ") {
 
         postRecipeToDatabase(newRecipeObject);
@@ -398,14 +417,14 @@ const addIngredientsToDatabase = () => {
                 "ingredient": "${ingredientToAdd}"
             }`
 
-            console.log("new ingredient object: ", newIngredientObject)
+
             postIngredientsToDatabase(newIngredientObject);
         }
     }
 }
 
 const postIngredientsToDatabase = async (newIngredientObject) => {
-    console.log(newIngredientObject)
+
     try {
         await fetch("https://shopping-list-bd71b.firebaseio.com/Ingredients.json", { method: "POST", body: `${newIngredientObject}` });
     }
@@ -420,7 +439,7 @@ const postRecipeToDatabase = async (newRecipeObject) => {
         await fetch("https://shopping-list-bd71b.firebaseio.com/Recipes.json", { method: "POST", body: `${newRecipeObject}` });
     }
     catch {
-        alert("Could no add ingredient to database");
+        alert("Could not add ingredient to database");
     }
 }
 
