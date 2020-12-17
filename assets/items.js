@@ -450,6 +450,22 @@ const shoppingItems = [
     {
         item: "Yoghurt",
         aisle: "Dairy"
+    },
+    {
+        item: "Red pepper",
+        aisle: "Vegetables"
+    },
+    {
+        item: "Fresh Koriander",
+        aisle: "Vegetables"
+    },
+    {
+        item: "Fresh spinach",
+        aisle: "Vegetables"
+    },
+    {
+        item: "Frozen spinach",
+        aisle: "Snacks"
     }
 ]
 
