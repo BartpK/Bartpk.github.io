@@ -198,6 +198,7 @@ const showList = (shoppingList) => {
 
         removeButton.addEventListener("click", () => { deleteItem(inputItem.id) });
         item.addEventListener("click", () => { updateStatus(inputItem.id, inputItem.item, inputItem.bought, inputItem.aisle, inputItem.qty) })
+        itemName.addEventListener("click", () => { updateStatus(inputItem.id, inputItem.item, inputItem.bought, inputItem.aisle, inputItem.qty) })
 
         const aisle = document.querySelector(`#${inputItem.aisle} `)
 
